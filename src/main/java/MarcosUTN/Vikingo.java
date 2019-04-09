@@ -19,4 +19,10 @@ public class Vikingo extends Humano {
     public void setBebedorProfesional(Integer bebedorProfesional) {
         this.bebedorProfesional = bebedorProfesional;
     }
+
+    @Override
+    public String toString()
+    {
+        return super.toString()+" Bebedor Profesional: ".concat(bebedorProfesional.toString());
+    }
 }

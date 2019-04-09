@@ -57,4 +57,8 @@ public class Humano {
     public void setBeber(Beber beber) {
         this.beber = beber;
     }
+    @Override
+    public String toString(){
+    return  " Nombre: ".concat(getNombre()).concat(" Edad:").concat(getEdad().toString()).concat("Peso: "+getPeso().toString());
+    }
 }
