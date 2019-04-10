@@ -4,6 +4,7 @@ import MarcosUTN.entities.Espartano;
 import MarcosUTN.entities.Humano;
 import MarcosUTN.entities.Tournament;
 import MarcosUTN.entities.Vikingo;
+import MarcosUTN.implementations.BeberEspartanoImpl;
 import MarcosUTN.implementations.BeberVikingoImpl;
 import MarcosUTN.implementations.OrinarEspartanoImpl;
 import MarcosUTN.implementations.OrinarVikingoImpl;
@@ -16,7 +17,7 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * Hello world!
+ * TP1 Marcos Davidovich.
  *
  */
 public class App 
@@ -29,7 +30,6 @@ public class App
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         Tournament t = new Tournament();
         List<Humano> vikingos =
                 Arrays.asList(
@@ -37,10 +37,10 @@ public class App
                         new Vikingo("Floki",46,50,new OrinarVikingoImpl(),new BeberVikingoImpl(),80),
                         new Vikingo("Byorn",22,70,new OrinarVikingoImpl(),new BeberVikingoImpl(),85),
                         new Vikingo("Ivar",15,40,new OrinarVikingoImpl(),new BeberVikingoImpl(),65),
-                        new Vikingo("Lagertha",43,50,new OrinarVikingoImpl(),new BeberVikingoImpl(),95));
+                        new Vikingo("Lagertha",43,30,new OrinarVikingoImpl(),new BeberVikingoImpl(),95));
         List<Humano> espartanos =
                 Arrays.asList(
-                        new Espartano("Prometeo",40,85,new OrinarEspartanoImpl(), new BeberVikingoImpl(),74),
+                        new Espartano("Prometeo",40,45,new OrinarEspartanoImpl(), new BeberVikingoImpl(),74),
                         new Espartano("Spartacus",45,68,new OrinarEspartanoImpl(), new BeberVikingoImpl(),20),
                         new Espartano("Gregorius",50,90,new OrinarEspartanoImpl(), new BeberVikingoImpl(),10),
                         new Espartano("Victorius",44,56,new OrinarEspartanoImpl(), new BeberVikingoImpl(),90),
@@ -58,6 +58,10 @@ public class App
         Humano winner = t.fight(fighters.get(0),fighters.get(1));
         System.out.println("Winner winner chicken dinner! "+winner.toString());
         c.insertResult(winner);
+        Humano tabernOwner = new Humano("Tabern Owner",99,99,new OrinarEspartanoImpl(), new BeberVikingoImpl());
+        Humano veryWinner = t.lastFight(tabernOwner,winner);
+        System.out.println("\nThe very winner is... "+veryWinner.toString()+"!");
+        c.insertResult(veryWinner);
     }
 
 }

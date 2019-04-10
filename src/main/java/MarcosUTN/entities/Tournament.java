@@ -48,5 +48,24 @@ public class Tournament {
             return null;
         }
     }
+    public static Humano lastFight(Humano tabernOwner, Humano humano) {
+        Integer damageTO;
+        Integer damageHuman = 0;
+        damageTO = tabernOwner.fight();
+
+        if (humano instanceof Vikingo) {
+            Vikingo vikingo = (Vikingo) humano;
+            damageHuman = vikingo.fight();
+        } else if (humano instanceof  Espartano) {
+            Espartano espartano = (Espartano) humano;
+            damageHuman = espartano.fight();
+        }
+        if (damageTO > damageHuman) {
+            return tabernOwner;
+        } else if (damageHuman > damageTO) {
+            return humano;
+        }
+        return null;
+    }
 
 }

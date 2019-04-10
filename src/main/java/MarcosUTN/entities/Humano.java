@@ -1,5 +1,8 @@
 package MarcosUTN.entities;
 
+import MarcosUTN.implementations.BeberVikingoImpl;
+import MarcosUTN.implementations.OrinarEspartanoImpl;
+import MarcosUTN.implementations.OrinarVikingoImpl;
 import MarcosUTN.interfaces.Beber;
 import MarcosUTN.interfaces.Orinar;
 
@@ -65,6 +68,9 @@ public class Humano {
     return  " Nombre: ".concat(getNombre()).concat(" Edad: ").concat(getEdad().toString()).concat(" Peso: "+getPeso().toString());
     }
     public Integer fight() {
+        if (this.getBeber() instanceof BeberVikingoImpl && this.getOrinar() instanceof OrinarEspartanoImpl) {
+            return this.getBeber().Beber() + this.getOrinar().Orinar() ;
+        }
         return 0;
     }
 }
