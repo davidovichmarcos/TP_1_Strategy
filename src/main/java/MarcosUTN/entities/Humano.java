@@ -1,4 +1,7 @@
-package MarcosUTN;
+package MarcosUTN.entities;
+
+import MarcosUTN.interfaces.Beber;
+import MarcosUTN.interfaces.Orinar;
 
 public class Humano {
     private String nombre;
@@ -59,6 +62,9 @@ public class Humano {
     }
     @Override
     public String toString(){
-    return  " Nombre: ".concat(getNombre()).concat(" Edad:").concat(getEdad().toString()).concat("Peso: "+getPeso().toString());
+    return  " Nombre: ".concat(getNombre()).concat(" Edad: ").concat(getEdad().toString()).concat(" Peso: "+getPeso().toString());
+    }
+    public Integer fight() {
+        return 0;
     }
 }

@@ -1,6 +1,18 @@
 package MarcosUTN;
 
+import MarcosUTN.entities.Espartano;
+import MarcosUTN.entities.Humano;
+import MarcosUTN.entities.Tournament;
+import MarcosUTN.entities.Vikingo;
+import MarcosUTN.implementations.BeberVikingoImpl;
+import MarcosUTN.implementations.OrinarEspartanoImpl;
+import MarcosUTN.implementations.OrinarVikingoImpl;
+import MarcosUTN.repository.Connection;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -11,12 +23,41 @@ public class App
 {
     public static void main( String[] args )
     {
-        //Humano vikingo = new Vikingo("Ragnar",43,80,new OrinarVikingoImpl(),new BeberVikingoImpl(),100);
-        System.out.println( "Hello World!" );
-        List<Vikingo> vikingos = Arrays.asList(new Vikingo("Ragnar",43,80,new OrinarVikingoImpl(),new BeberVikingoImpl(),100),
-                new Vikingo("Ragnar",43,80,new OrinarVikingoImpl(),new BeberVikingoImpl(),100));
+       Connection c = new Connection();
+        try {
+            c.connect();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
+        Tournament t = new Tournament();
+        List<Humano> vikingos =
+                Arrays.asList(
+                        new Vikingo("Ragnar",43,80,new OrinarVikingoImpl(),new BeberVikingoImpl(),100),
+                        new Vikingo("Floki",46,50,new OrinarVikingoImpl(),new BeberVikingoImpl(),80),
+                        new Vikingo("Byorn",22,70,new OrinarVikingoImpl(),new BeberVikingoImpl(),85),
+                        new Vikingo("Ivar",15,40,new OrinarVikingoImpl(),new BeberVikingoImpl(),65),
+                        new Vikingo("Lagertha",43,50,new OrinarVikingoImpl(),new BeberVikingoImpl(),95));
+        List<Humano> espartanos =
+                Arrays.asList(
+                        new Espartano("Prometeo",40,85,new OrinarEspartanoImpl(), new BeberVikingoImpl(),74),
+                        new Espartano("Spartacus",45,68,new OrinarEspartanoImpl(), new BeberVikingoImpl(),20),
+                        new Espartano("Gregorius",50,90,new OrinarEspartanoImpl(), new BeberVikingoImpl(),10),
+                        new Espartano("Victorius",44,56,new OrinarEspartanoImpl(), new BeberVikingoImpl(),90),
+                        new Espartano("Spartan",20,78,new OrinarEspartanoImpl(), new BeberVikingoImpl(),50));
 
+        t.sortTeams(vikingos,espartanos);
+        System.out.println("---------Vikingos---------");
+        t.presentTeams(vikingos);
 
+        System.out.println("---------Espartanos---------");
+        t.presentTeams(espartanos);
+        System.out.println("---------Competidores---------");
+        List<Humano> fighters = t.getFighters(vikingos,espartanos);
+        t.presentTeams(fighters);
+        Humano winner = t.fight(fighters.get(0),fighters.get(1));
+        System.out.println("Winner winner chicken dinner! "+winner.toString());
+        c.insertResult(winner);
     }
-    }
+
+}

@@ -1,6 +1,10 @@
-package MarcosUTN;
+package MarcosUTN.entities;
+
+import MarcosUTN.interfaces.Beber;
+import MarcosUTN.interfaces.Orinar;
 
 public class Espartano extends Humano {
+
     private Integer toleranciaExtra;
 
     public Espartano() {
@@ -25,4 +29,10 @@ public class Espartano extends Humano {
     {
         return super.toString()+" Tolerancia Extra: ".concat(toleranciaExtra.toString());
     }
+
+    @Override
+    public Integer fight() {
+        return this.getBeber().Beber() + this.getToleranciaExtra() - this.getOrinar().Orinar();
+    }
+
 }
