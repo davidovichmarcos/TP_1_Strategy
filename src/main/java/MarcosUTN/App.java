@@ -24,7 +24,7 @@ public class App
 {
     public static void main( String[] args )
     {
-       Connection c = new Connection();
+        Connection c = new Connection();
         try {
             c.connect();
         } catch (SQLException e) {

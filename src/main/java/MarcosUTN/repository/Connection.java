@@ -16,11 +16,12 @@ public class Connection {
         static final String DB_USER = "root";
         static final String DB_PASS = "";
         static Statement st;
+        private static java.sql.Connection connection;
 
         public static void connect() throws SQLException {
             try {
                 Class.forName(JDBC_DRIVER);
-                java.sql.Connection connection = DriverManager.getConnection("jdbc:mysql:"+ DB_HOST + DB_NAME, DB_USER, DB_PASS);
+                connection = DriverManager.getConnection("jdbc:mysql:"+ DB_HOST + DB_NAME, DB_USER, DB_PASS);
                 st = connection.createStatement();
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
@@ -31,6 +32,7 @@ public class Connection {
             try {
                 String query = " INSERT INTO winners (nombre, edad, peso) VALUES ( \" "+ winner.getNombre() + " \" ,"+winner.getEdad() + ","+winner.getPeso() + ")";
                 st.executeUpdate(query);
+                connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
