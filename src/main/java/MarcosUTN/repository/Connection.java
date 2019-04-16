@@ -32,7 +32,6 @@ public class Connection {
             try {
                 String query = " INSERT INTO winners (nombre, edad, peso) VALUES ( \" "+ winner.getNombre() + " \" ,"+winner.getEdad() + ","+winner.getPeso() + ")";
                 st.executeUpdate(query);
-                connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
